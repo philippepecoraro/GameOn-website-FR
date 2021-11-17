@@ -11,6 +11,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const modalCloseBtn = document.querySelector(".close");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -20,4 +21,29 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+// close modal event
+modalCloseBtn.addEventListener("click", closeModal);
 
+// close modal form
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
+// form validation function
+function validate() {
+  let firstname = document.querySelector("#first").value;
+  let lastname = document.querySelector("#last").value;
+  let email = document.querySelector("#email").value;
+  let birthdate = document.querySelector("#birthdate").value;
+  let quantity = document.querySelector("#quantity").value;
+  let location = document.querySelector('input[name=location]:checked');
+
+  if (firstname == "" || lastname == "" || email == "" || location === null) {
+    alert("Entrez votre données");
+    return false;
+  }
+  else {
+    alert("Données complètes");
+    return true;
+  }
+}
