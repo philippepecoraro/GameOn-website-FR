@@ -17,13 +17,14 @@ const lastname = document.querySelector("#last");
 const email = document.querySelector("#email");
 const birthdate = document.querySelector("#birthdate");
 const quantity = document.querySelector("#quantity");
-const town = document.getElementsByName('location');
+const checkboxInput = document.querySelector("#checkbox1");
 const firstnameDataError = document.querySelector(".formData[data-error]");
 const lastnameDataError = document.querySelector(".formData[data-error1]");
 const emailDataError = document.querySelector(".formData[data-error2");
 const birthdateDataError = document.querySelector(".formData[data-error3");
 const quantityDataError = document.querySelector(".formData[data-error4]");
 const locationDataError = document.querySelector(".formData[data-error5]");
+const checkboxDataMissing = document.querySelector(".formData[data-error6");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -124,6 +125,7 @@ function quantityValidity() {
 // control location input
 function locationValidity() {  
   const town = document.querySelector('input[name=location]:checked'); 
+  console.log('town:', town)
   if (town !== null) {
     alert("town Ok");
     removeError(locationDataError);
@@ -135,7 +137,22 @@ function locationValidity() {
     locationDataError.setAttribute("data-error-visible", "true");     
     return false;
   }
-}  
+}
+
+// control checkbox input
+function checkboxValidity() {
+  if (checkboxInput.validity.valid) {
+    alert("checkboxInput Ok");
+    removeError(checkboxDataMissing);
+    return true;
+  }
+  if (!checkboxInput.validity.valid) {
+    alert("checkbox.validity.valid Non Ok");
+    checkboxDataMissing.setAttribute("data-error", "Veuillez accepter les conditions");
+    checkboxDataMissing.setAttribute("data-error-visible", "true");
+    return false;
+  }
+}
 
 // remove errors
 function removeError(el) {
@@ -150,10 +167,12 @@ function validate() {
   emailValidity();  
   birthdateValidity(); 
   quantityValidity(); 
-  locationValidity();  
+  locationValidity();
+  checkboxValidity()
 
   if (!firstNameValidity() || !lastNameValidity() || !emailValidity()
-    || !birthdateValidity() || !quantityValidity() || !locationValidity())   { 
+    || !birthdateValidity() || !quantityValidity() || !locationValidity()
+    || !checkboxValidity()) {
     alert("Veuillez compléter le formulaire");
     return false;
   } else {
