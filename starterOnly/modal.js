@@ -24,7 +24,7 @@ const emailDataError = document.querySelector(".formData[data-error2");
 const birthdateDataError = document.querySelector(".formData[data-error3");
 const quantityDataError = document.querySelector(".formData[data-error4]");
 const locationDataError = document.querySelector(".formData[data-error5]");
-const checkboxDataMissing = document.querySelector(".formData[data-error6");
+const checkboxDataMissing = document.querySelector(".formData[data-error6]");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -42,117 +42,138 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-// control fistname input
-function firstNameValidity() {
-  if (firstname.validity.valid) {
-    alert("firstname.validity.valid Ok");
-    firstnameDataError.removeAttribute("data-error-visible");    
-    return true;  }
-  if (!firstname.validity.valid) {   
-    
-    alert("firstname.validity.valid non Ok");    
-    firstnameDataError.setAttribute("data-error", "Erreur sur le prénom"); 
-    firstnameDataError.setAttribute("data-error-visible", "true");      
-    firstname.focus();    
-    return false;
+// listen firstname input
+firstname.addEventListener("input", firstnameValue);
+function firstnameValue() {
+   firstNameValidity();  
+}
+  // control fistname input
+  function firstNameValidity() {
+    if (firstname.validity.valid) {    
+      alert("firstname.validity.valid Ok");
+      firstnameDataError.removeAttribute("data-error-visible");
+      return true;
+    }
+    if (!firstname.validity.valid) {  
+       alert("firstname.validity.valid non Ok");    
+      firstnameDataError.setAttribute("data-error", "Erreur sur le prénom");
+      firstnameDataError.setAttribute("data-error-visible", "true");
+      firstname.focus();
+      return false;
+    }
   }
+
+// listen lastname input
+lastname.addEventListener("input", lastnameValue);
+function lastnameValue() {
+  lastNameValidity();
 }
 
-// control lastname input
-function lastNameValidity() {  
-  if (lastname.validity.valid) {  
-    alert("lastname.validity.valid Ok");   
-    removeError(lastnameDataError);
-    return true;
-  }  
-  if (!lastname.validity.valid) {        
-    alert("lastname.validity.valid non Ok");
-    lastnameDataError.setAttribute("data-error", "Erreur sur le nom");   
-    lastnameDataError.setAttribute("data-error-visible", "true");                       
-    lastname.focus();    
-    return false;
-  }
+  // control lastname input
+  function lastNameValidity() {
+    if (lastname.validity.valid) {
+      alert("lastname.validity.valid Ok");   
+      removeError(lastnameDataError);
+      return true;
+    }   
+      if (!lastname.validity.valid) {
+        alert("lastname.validity.valid non Ok");
+        lastnameDataError.setAttribute("data-error", "Erreur sur le nom");
+        lastnameDataError.setAttribute("data-error-visible", "true");
+        lastname.focus();
+        return false;
+      }
+    }
+  
+// listen email input
+email.addEventListener("input", emailValue);
+function emailValue() {
+  emailValidity();
 }
 
-// control email input
-function emailValidity() {  
-  if (email.validity.valid) {
-    alert("email.validity OK");
-    removeError(emailDataError);
-    return true;
+  // control email input
+function emailValidity() { 
+    if (email.validity.valid) {
+      alert("email.validity OK");
+      removeError(emailDataError);
+      return true;
+    }  
+    if (!email.validity.valid) {
+      alert("email.validity.valid non Ok");
+      emailDataError.setAttribute("data-error", "Erreur sur le mail");
+      emailDataError.setAttribute("data-error-visible", "true");
+      email.focus();
+      return false;
+    }  
   }
-  if (!email.validity.valid) {
-    alert("email.validity.valid non Ok");
-    emailDataError.setAttribute("data-error", "Erreur sur le mail");
-    emailDataError.setAttribute("data-error-visible", "true");     
-    email.focus();
-    return false;
+
+  // control birthdate input
+  function birthdateValidity() {
+    if (birthdate.validity.valid) {
+      alert("birthdate.validity Ok");
+      removeError(birthdateDataError);
+      return true;
+    }
+    if (!birthdate.validity.valid) {    
+      alert("birthdate.validity.valid non Ok");
+      birthdateDataError.setAttribute("data-error", "Erreur sur la date de naissance");
+      birthdateDataError.setAttribute("data-error-visible", "true");
+      birthdate.focus();
+      return false;
+    }
+}
+  
+// listen quantity input
+quantity.addEventListener("input", quantityValue);
+function quantityValue() {
+  quantityValidity();
+}
+  // control quantity input
+  function quantityValidity() {
+    if (quantity.validity.valid) {
+      alert("quantity.validity Ok");
+      removeError(quantityDataError);
+      return true;
+    }
+    if (!quantity.validity.valid) {
+      alert("quantity.validity.valid non Ok");
+      quantityDataError.setAttribute("data-error", "Une quantité est demandé");
+      quantityDataError.setAttribute("data-error-visible", "true");
+      quantity.focus();
+      return false;
+    }
   }
+
+  // control location input
+  function locationValidity() {
+    const town = document.querySelector('input[name=location]:checked');    
+    if (town !== null) {
+      alert("town Ok");
+      removeError(locationDataError);
+      return true;
+    }
+    if (town === null) {
+      alert("town.validity.valid non Ok");
+      locationDataError.setAttribute("data-error", "Une ville doit être indiquée");
+      locationDataError.setAttribute("data-error-visible", "true");
+      return false;
+    }
 }
 
-// control birthdate input
-function birthdateValidity() {  
-  if (birthdate.validity.valid) {
-    alert("birthdate.validity Ok");
-    removeError(birthdateDataError);
-    return true;
+  // control checkbox input
+function checkboxValidity() {  
+    if (checkboxInput.validity.valid) {
+      alert("checkboxInput Ok");
+      removeError(checkboxDataMissing);
+      return true;
+    }
+    if (!checkboxInput.validity.valid) {
+      alert("checkbox.validity.valid Non Ok");
+      checkboxDataMissing.setAttribute("data-error", "Veuillez accepter les conditions");
+      checkboxDataMissing.setAttribute("data-error-visible", "true");
+      return false;
+    }
   }
-  if (!birthdate.validity.valid) {
-    alert("birthdate.validity.valid non Ok");
-    birthdateDataError.setAttribute("data-error", "Erreur sur la date de naissance");
-    birthdateDataError.setAttribute("data-error-visible", "true");   
-    birthdate.focus();         
-    return false;
-  }
-}
-
-// control quantity input
-function quantityValidity() {  
-  if (quantity.validity.valid) {
-    alert("quantity.validity Ok");
-    removeError(quantityDataError);
-    return true;
-  }
-  if (!quantity.validity.valid) {
-    alert("quantity.validity.valid non Ok");
-    quantityDataError.setAttribute("data-error", "Une quantité est demandé");
-    quantityDataError.setAttribute("data-error-visible", "true");   
-    quantity.focus();       
-    return false;
-  }
-}
-
-// control location input
-function locationValidity() {  
-  const town = document.querySelector('input[name=location]:checked'); 
-  console.log('town:', town)
-  if (town !== null) {
-    alert("town Ok");
-    removeError(locationDataError);
-    return true;
-  }
-  if (town === null) {
-    alert("town.validity.valid non Ok");
-    locationDataError.setAttribute("data-error", "Une ville doit être indiquée");
-    locationDataError.setAttribute("data-error-visible", "true");     
-    return false;
-  }
-}
-
-// control checkbox input
-function checkboxValidity() {
-  if (checkboxInput.validity.valid) {
-    alert("checkboxInput Ok");
-    removeError(checkboxDataMissing);
-    return true;
-  }
-  if (!checkboxInput.validity.valid) {
-    alert("checkbox.validity.valid Non Ok");
-    checkboxDataMissing.setAttribute("data-error", "Veuillez accepter les conditions");
-    checkboxDataMissing.setAttribute("data-error-visible", "true");
-    return false;
-  }
-}
 
 // remove errors
 function removeError(el) {
@@ -161,21 +182,14 @@ function removeError(el) {
 }
 
 // form validation function
-function validate() {        
-  firstNameValidity(); 
-  lastNameValidity(); 
-  emailValidity();  
-  birthdateValidity(); 
-  quantityValidity(); 
-  locationValidity();
-  checkboxValidity()
-
-  if (!firstNameValidity() || !lastNameValidity() || !emailValidity()
-    || !birthdateValidity() || !quantityValidity() || !locationValidity()
-    || !checkboxValidity()) {
-    alert("Veuillez compléter le formulaire");
-    return false;
-  } else {
+  function validate() {
+  if (firstNameValidity()  && lastNameValidity() && emailValidity()
+    && birthdateValidity() && quantityValidity() && locationValidity()
+  && checkboxValidity()) {      
     alert("Formulaire complété");
+    return true
+  } else {
+    alert("Veuillez compléter le formulaire");
+    return false
   }
 }
