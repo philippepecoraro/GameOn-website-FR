@@ -107,6 +107,11 @@ function emailValidity() {
     }  
   }
 
+  birthdate.addEventListener("change", birthdateValue);
+  function birthdateValue() {
+    birthdateValidity();
+  }
+
   // control birthdate input
   function birthdateValidity() {
     if (birthdate.validity.valid) {
@@ -160,6 +165,11 @@ function quantityValue() {
     }
 }
 
+checkboxInput.addEventListener("change", checkboxValue);
+console.log('checkboxInput:', checkboxInput)
+function checkboxValue() {
+  checkboxValidity();
+}
   // control checkbox input
 function checkboxValidity() {  
     if (checkboxInput.validity.valid) {
