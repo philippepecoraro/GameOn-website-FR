@@ -187,6 +187,39 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
+.endForm {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 300px;
+  top: 300px;
+  height: 200px;
+  width: 100%;
+  max-width: 300px;
+  overflow: auto;
+  background-color: #66BB6A;
+  text-align: center;
+  margin: auto;
+  border-radius: 15px;
+}
+.endForm p {
+  padding-top: 10px;
+}
+.endFormBtn1, .endFormBtn2 {
+  border-radius: 5px;
+  padding: 8px;
+  margin: 50px 10px
+}
+
+@media screen and (max-width: 800px) {
+  .endForm {
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    margin: auto;
+
+  }
+}  
 
 label {
   font-family: var(--font-default);

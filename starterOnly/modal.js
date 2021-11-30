@@ -12,6 +12,7 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalCloseBtn = document.querySelector(".close");
+const modalEndForm = document.querySelector(".endForm");
 const firstname = document.querySelector("#first");
 const lastname = document.querySelector("#last");
 const email = document.querySelector("#email");
@@ -40,6 +41,36 @@ modalCloseBtn.addEventListener("click", closeModal);
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  document.getElementById('reserve').reset();   
+  for (const item of formData) {    
+    item.removeAttribute("data-error");
+    item.removeAttribute("data-error-visible");
+  }
+}
+
+// buttons modal endForm
+document.querySelector(".endFormBtn1").addEventListener("click", closeEndForm);
+document.querySelector(".endFormBtn2").addEventListener("click", cancelEndForm);
+
+function closeEndForm() {
+  document.getElementById("reserve").submit();
+  modalEndForm.style.display = "none";
+}
+
+function cancelEndForm() {
+  modalEndForm.style.display = "none";
+  modalbg.style.display = "block";
+}
+
+// launch modal endForm
+document.querySelector(".btn-submit").addEventListener("click", launchEndForm);
+
+function launchEndForm(e) {  
+  e.preventDefault();  
+  if (validate()) {
+    modalbg.style.display = "none";
+    modalEndForm.style.display = "block";    
+  }  
 }
 
 // listen firstname input
@@ -50,12 +81,12 @@ function firstnameValue() {
   // control fistname input
   function firstNameValidity() {
     if (firstname.validity.valid) {    
-      alert("firstname.validity.valid Ok");
+   //   alert("firstname.validity.valid Ok");
       firstnameDataError.removeAttribute("data-error-visible");
       return true;
     }
     if (!firstname.validity.valid) {  
-       alert("firstname.validity.valid non Ok");    
+   //    alert("firstname.validity.valid non Ok");    
       firstnameDataError.setAttribute("data-error", "Erreur sur le prénom");
       firstnameDataError.setAttribute("data-error-visible", "true");
       firstname.focus();
@@ -72,12 +103,12 @@ function lastnameValue() {
   // control lastname input
   function lastNameValidity() {
     if (lastname.validity.valid) {
-      alert("lastname.validity.valid Ok");   
+   //   alert("lastname.validity.valid Ok");   
       removeError(lastnameDataError);
       return true;
     }   
       if (!lastname.validity.valid) {
-        alert("lastname.validity.valid non Ok");
+     //   alert("lastname.validity.valid non Ok");
         lastnameDataError.setAttribute("data-error", "Erreur sur le nom");
         lastnameDataError.setAttribute("data-error-visible", "true");
         lastname.focus();
@@ -94,12 +125,12 @@ function emailValue() {
   // control email input
 function emailValidity() { 
     if (email.validity.valid) {
-      alert("email.validity OK");
+     // alert("email.validity OK");
       removeError(emailDataError);
       return true;
     }  
     if (!email.validity.valid) {
-      alert("email.validity.valid non Ok");
+    //  alert("email.validity.valid non Ok");
       emailDataError.setAttribute("data-error", "Erreur sur le mail");
       emailDataError.setAttribute("data-error-visible", "true");
       email.focus();
@@ -115,12 +146,12 @@ function emailValidity() {
   // control birthdate input
   function birthdateValidity() {
     if (birthdate.validity.valid) {
-      alert("birthdate.validity Ok");
+    //  alert("birthdate.validity Ok");
       removeError(birthdateDataError);
       return true;
     }
     if (!birthdate.validity.valid) {    
-      alert("birthdate.validity.valid non Ok");
+   //   alert("birthdate.validity.valid non Ok");
       birthdateDataError.setAttribute("data-error", "Erreur sur la date de naissance");
       birthdateDataError.setAttribute("data-error-visible", "true");
       birthdate.focus();
@@ -136,12 +167,12 @@ function quantityValue() {
   // control quantity input
   function quantityValidity() {
     if (quantity.validity.valid) {
-      alert("quantity.validity Ok");
+    //  alert("quantity.validity Ok");
       removeError(quantityDataError);
       return true;
     }
     if (!quantity.validity.valid) {
-      alert("quantity.validity.valid non Ok");
+   //  alert("quantity.validity.valid non Ok");
       quantityDataError.setAttribute("data-error", "Une quantité est demandé");
       quantityDataError.setAttribute("data-error-visible", "true");
       quantity.focus();
@@ -153,12 +184,12 @@ function quantityValue() {
   function locationValidity() {
     const town = document.querySelector('input[name=location]:checked');    
     if (town !== null) {
-      alert("town Ok");
+  //    alert("town Ok");
       removeError(locationDataError);
       return true;
     }
     if (town === null) {
-      alert("town.validity.valid non Ok");
+   //   alert("town.validity.valid non Ok");
       locationDataError.setAttribute("data-error", "Une ville doit être indiquée");
       locationDataError.setAttribute("data-error-visible", "true");
       return false;
@@ -173,12 +204,12 @@ function checkboxValue() {
   // control checkbox input
 function checkboxValidity() {  
     if (checkboxInput.validity.valid) {
-      alert("checkboxInput Ok");
+   //   alert("checkboxInput Ok");
       removeError(checkboxDataMissing);
       return true;
     }
     if (!checkboxInput.validity.valid) {
-      alert("checkbox.validity.valid Non Ok");
+    //  alert("checkbox.validity.valid Non Ok");
       checkboxDataMissing.setAttribute("data-error", "Veuillez accepter les conditions");
       checkboxDataMissing.setAttribute("data-error-visible", "true");
       return false;
@@ -192,14 +223,14 @@ function removeError(el) {
 }
 
 // form validation function
-  function validate() {
-  if (firstNameValidity()  && lastNameValidity() && emailValidity()
+function validate() {
+  if (firstNameValidity() && lastNameValidity() && emailValidity()
     && birthdateValidity() && quantityValidity() && locationValidity()
-  && checkboxValidity()) {      
-    alert("Formulaire complété");
-    return true
-  } else {
-    alert("Veuillez compléter le formulaire");
-    return false
-  }
+    && checkboxValidity()) {   
+      return true;     
+    }
+     else {
+      alert("Veuillez compléter le formulaire");
+      return false;
+    }
 }
