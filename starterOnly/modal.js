@@ -11,7 +11,6 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const modalCloseBtn = document.querySelector(".close");
 const modalEndForm = document.querySelector(".endForm");
 const firstname = document.querySelector("#first");
 const lastname = document.querySelector("#last");
@@ -36,7 +35,7 @@ function launchModal() {
 }
 
 // close modal event
-modalCloseBtn.addEventListener("click", closeModal);
+document.querySelector(".close").addEventListener("click", closeModal);
 
 // close modal form
 function closeModal() {
@@ -46,6 +45,9 @@ function closeModal() {
     item.removeAttribute("data-error");
     item.removeAttribute("data-error-visible");
   }
+  for (const item of modalBtn) {
+    item.disabled = false;    
+  }    
 }
 
 // buttons modal endForm
@@ -69,7 +71,11 @@ function launchEndForm(e) {
   e.preventDefault();  
   if (validate()) {
     modalbg.style.display = "none";
-    modalEndForm.style.display = "block";    
+    modalEndForm.style.display = "block";  
+    document.getElementById('myTopnav').scrollTop = 0;
+    for (const item of modalBtn) {
+      item.disabled = true;      
+    }    
   }  
 }
 
@@ -138,6 +144,7 @@ function emailValidity() {
     }  
   }
 
+  // listen bithdate input
   birthdate.addEventListener("change", birthdateValue);
   function birthdateValue() {
     birthdateValidity();
@@ -197,7 +204,6 @@ function quantityValue() {
 }
 
 checkboxInput.addEventListener("change", checkboxValue);
-console.log('checkboxInput:', checkboxInput)
 function checkboxValue() {
   checkboxValidity();
 }
@@ -229,8 +235,7 @@ function validate() {
     && checkboxValidity()) {   
       return true;     
     }
-     else {
-      alert("Veuillez compléter le formulaire");
+     else {      
       return false;
     }
 }
