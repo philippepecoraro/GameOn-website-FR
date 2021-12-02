@@ -71,8 +71,9 @@ function launchEndForm(e) {
   e.preventDefault();  
   if (validate()) {
     modalbg.style.display = "none";
-    modalEndForm.style.display = "block";  
-    document.getElementById('myTopnav').scrollTop = 0;
+    modalEndForm.style.display = "block";    
+    document.querySelector(".endFormBtn1").focus();
+    document.querySelector(".endFormBtn1").style.border = "3px solid black";
     for (const item of modalBtn) {
       item.disabled = true;      
     }    
