@@ -198,21 +198,12 @@ main {
   font-size: 30px;
   font-weight: bold;
   border: 2px solid black;
+  padding: 30px;
 }
 .endForm p {
   padding-top: 10px;
 }
-.endFormBtn {
-  border-radius: 5px;
-  padding: 8px;
-  margin: 50px 10px;
-  cursor: pointer;
-  height: 50px;
-  width: 120px;
-  font-size: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-}
+
 .endFormBtn:hover {
   background: #3876ac;
 }
@@ -250,8 +241,7 @@ input {
   display: block;
   margin-top: 8px;
   margin-bottom: 10px;
-  text-align: left;
-  line-height: 0.3;
+  text-align: left; 
   opacity: 0;
   transition: 0.3s;
 }
@@ -560,10 +550,7 @@ footer {
     min-width: 200px;
     width: 100%;
     text-align: center;
-  }
-  .formData[data-error]::after {
-    line-height: normal;
-  }
+  } 
 } 
 @keyframes modalopen {
   from {

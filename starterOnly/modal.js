@@ -18,7 +18,7 @@ const email = document.querySelector("#email");
 const birthdate = document.querySelector("#birthdate");
 const quantity = document.querySelector("#quantity");
 const checkboxInput = document.querySelector("#checkbox1");
-const firstnameDataError = document.querySelector(".formData[data-error]");
+const firstnameDataError = document.querySelector(".formData[data-error0]");
 const lastnameDataError = document.querySelector(".formData[data-error1]");
 const emailDataError = document.querySelector(".formData[data-error2");
 const birthdateDataError = document.querySelector(".formData[data-error3");
@@ -50,18 +50,10 @@ function closeModal() {
   }    
 }
 
-// buttons modal endForm
-document.querySelector(".endFormBtn1").addEventListener("click", closeEndForm);
-document.querySelector(".endFormBtn2").addEventListener("click", cancelEndForm);
-
+// close modal endForm
 function closeEndForm() {
-  document.getElementById("reserve").submit();
+ document.getElementById("reserve").submit();
   modalEndForm.style.display = "none";
-}
-
-function cancelEndForm() {
-  modalEndForm.style.display = "none";
-  modalbg.style.display = "block";
 }
 
 // launch modal endForm
@@ -71,35 +63,30 @@ function launchEndForm(e) {
   e.preventDefault();  
   if (validate()) {
     modalbg.style.display = "none";
-    modalEndForm.style.display = "block";    
-    document.querySelector(".endFormBtn1").focus();
-    document.querySelector(".endFormBtn1").style.border = "3px solid black";
-    for (const item of modalBtn) {
-      item.disabled = true;      
-    }    
+    modalEndForm.style.display = "block";
+    window.scrollTo(0, 0);
+    setTimeout(closeEndForm, 3000);
   }  
-}
+}          
 
 // listen firstname input
 firstname.addEventListener("input", firstnameValue);
 function firstnameValue() {
    firstNameValidity();  
 }
-  // control fistname input
-  function firstNameValidity() {
-    if (firstname.validity.valid) {    
-   //   alert("firstname.validity.valid Ok");
-      firstnameDataError.removeAttribute("data-error-visible");
-      return true;
-    }
-    if (!firstname.validity.valid) {  
-   //    alert("firstname.validity.valid non Ok");    
-      firstnameDataError.setAttribute("data-error", "Erreur sur le prénom");
-      firstnameDataError.setAttribute("data-error-visible", "true");
-      firstname.focus();
-      return false;
-    }
+// control fistname input
+function firstNameValidity() {
+  if (firstname.validity.valid) {       
+    removeError(firstnameDataError);
+    return true;
   }
+  if (!firstname.validity.valid) {       
+    firstnameDataError.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom");
+    firstnameDataError.setAttribute("data-error-visible", "true");
+    firstname.focus();
+    return false;
+  }
+}
 
 // listen lastname input
 lastname.addEventListener("input", lastnameValue);
@@ -107,21 +94,19 @@ function lastnameValue() {
   lastNameValidity();
 }
 
-  // control lastname input
-  function lastNameValidity() {
-    if (lastname.validity.valid) {
-   //   alert("lastname.validity.valid Ok");   
-      removeError(lastnameDataError);
-      return true;
-    }   
-      if (!lastname.validity.valid) {
-     //   alert("lastname.validity.valid non Ok");
-        lastnameDataError.setAttribute("data-error", "Erreur sur le nom");
-        lastnameDataError.setAttribute("data-error-visible", "true");
-        lastname.focus();
-        return false;
-      }
-    }
+// control lastname input
+function lastNameValidity() {
+  if (lastname.validity.valid) {    
+    removeError(lastnameDataError);
+    return true;
+  }   
+   if (!lastname.validity.valid) {     
+      lastnameDataError.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom");
+      lastnameDataError.setAttribute("data-error-visible", "true");
+      lastname.focus();
+      return false;
+   }
+}
   
 // listen email input
 email.addEventListener("input", emailValue);
@@ -129,42 +114,38 @@ function emailValue() {
   emailValidity();
 }
 
-  // control email input
+// control email input
 function emailValidity() { 
-    if (email.validity.valid) {
-     // alert("email.validity OK");
+  if (email.validity.valid) {    
       removeError(emailDataError);
       return true;
-    }  
-    if (!email.validity.valid) {
-    //  alert("email.validity.valid non Ok");
-      emailDataError.setAttribute("data-error", "Erreur sur le mail");
+  }  
+  if (!email.validity.valid) {   
+      emailDataError.setAttribute("data-error", "Veuillez entrer une adresse mail correct");
       emailDataError.setAttribute("data-error-visible", "true");
       email.focus();
       return false;
-    }  
-  }
+  }  
+}
 
-  // listen bithdate input
-  birthdate.addEventListener("change", birthdateValue);
-  function birthdateValue() {
-    birthdateValidity();
-  }
+// listen bithdate input
+birthdate.addEventListener("change", birthdateValue);
+function birthdateValue() {
+  birthdateValidity();
+}
 
-  // control birthdate input
-  function birthdateValidity() {
-    if (birthdate.validity.valid) {
-    //  alert("birthdate.validity Ok");
-      removeError(birthdateDataError);
-      return true;
-    }
-    if (!birthdate.validity.valid) {    
-   //   alert("birthdate.validity.valid non Ok");
-      birthdateDataError.setAttribute("data-error", "Erreur sur la date de naissance");
-      birthdateDataError.setAttribute("data-error-visible", "true");
-      birthdate.focus();
-      return false;
-    }
+// control birthdate input
+function birthdateValidity() {
+  if (birthdate.validity.valid) {  
+    removeError(birthdateDataError);
+    return true;
+  }
+  if (!birthdate.validity.valid) {      
+    birthdateDataError.setAttribute("data-error", "Vous devez entrer votre date de naissance");
+    birthdateDataError.setAttribute("data-error-visible", "true");
+    birthdate.focus();
+    return false;
+  }
 }
   
 // listen quantity input
@@ -172,56 +153,50 @@ quantity.addEventListener("input", quantityValue);
 function quantityValue() {
   quantityValidity();
 }
-  // control quantity input
-  function quantityValidity() {
-    if (quantity.validity.valid) {
-    //  alert("quantity.validity Ok");
-      removeError(quantityDataError);
-      return true;
-    }
-    if (!quantity.validity.valid) {
-   //  alert("quantity.validity.valid non Ok");
-      quantityDataError.setAttribute("data-error", "Une quantité est demandé");
-      quantityDataError.setAttribute("data-error-visible", "true");
-      quantity.focus();
-      return false;
-    }
+// control quantity input
+function quantityValidity() {
+  if (quantity.validity.valid) {    
+    removeError(quantityDataError);
+    return true;
+  }
+  if (!quantity.validity.valid) {   
+    quantityDataError.setAttribute("data-error", "Une quantité entre 0 et 99 est demandé");
+    quantityDataError.setAttribute("data-error-visible", "true");
+    quantity.focus();
+    return false;
+  }
   }
 
-  // control location input
-  function locationValidity() {
-    const town = document.querySelector('input[name=location]:checked');    
-    if (town !== null) {
-  //    alert("town Ok");
-      removeError(locationDataError);
-      return true;
-    }
-    if (town === null) {
-   //   alert("town.validity.valid non Ok");
-      locationDataError.setAttribute("data-error", "Une ville doit être indiquée");
-      locationDataError.setAttribute("data-error-visible", "true");
-      return false;
-    }
+// control location input
+function locationValidity() {
+  const town = document.querySelector('input[name=location]:checked');    
+  if (town !== null) {  
+    removeError(locationDataError);
+    return true;
+  }
+  if (town === null) {   
+    locationDataError.setAttribute("data-error", "Vous devez choisir une option");
+    locationDataError.setAttribute("data-error-visible", "true");
+    return false;
+  }
 }
 
 checkboxInput.addEventListener("change", checkboxValue);
 function checkboxValue() {
   checkboxValidity();
 }
-  // control checkbox input
+// control checkbox input
 function checkboxValidity() {  
-    if (checkboxInput.validity.valid) {
-   //   alert("checkboxInput Ok");
-      removeError(checkboxDataMissing);
-      return true;
-    }
-    if (!checkboxInput.validity.valid) {
-    //  alert("checkbox.validity.valid Non Ok");
-      checkboxDataMissing.setAttribute("data-error", "Veuillez accepter les conditions");
-      checkboxDataMissing.setAttribute("data-error-visible", "true");
-      return false;
-    }
+  if (checkboxInput.validity.valid) {  
+    removeError(checkboxDataMissing);
+    return true;
   }
+  if (!checkboxInput.validity.valid) {   
+    checkboxDataMissing.setAttribute("data-error", "Vous devez vérifier que vous acceptez les termes et conditions");
+    checkboxDataMissing.setAttribute("data-error-visible", "true");
+    return false;
+  }
+}
 
 // remove errors
 function removeError(el) {
