@@ -66,14 +66,15 @@ function launchEndForm(e) {
     modalEndForm.style.display = "block";
     window.scrollTo(0, 0);
     setTimeout(closeEndForm, 3000);
+    for (const item of modalBtn) {
+      item.disabled = true;
+    }
   }  
 }          
 
 // listen firstname input
-firstname.addEventListener("input", firstnameValue);
-function firstnameValue() {
-   firstNameValidity();  
-}
+firstname.addEventListener("input", firstNameValidity);
+
 // control fistname input
 function firstNameValidity() {
   if (firstname.validity.valid) {       
@@ -89,10 +90,7 @@ function firstNameValidity() {
 }
 
 // listen lastname input
-lastname.addEventListener("input", lastnameValue);
-function lastnameValue() {
-  lastNameValidity();
-}
+lastname.addEventListener("input", lastNameValidity);
 
 // control lastname input
 function lastNameValidity() {
@@ -109,10 +107,7 @@ function lastNameValidity() {
 }
   
 // listen email input
-email.addEventListener("input", emailValue);
-function emailValue() {
-  emailValidity();
-}
+email.addEventListener("input", emailValidity);
 
 // control email input
 function emailValidity() { 
@@ -128,11 +123,8 @@ function emailValidity() {
   }  
 }
 
-// listen bithdate input
-birthdate.addEventListener("change", birthdateValue);
-function birthdateValue() {
-  birthdateValidity();
-}
+// listen birthdate input
+birthdate.addEventListener("change", birthdateValidity);
 
 // control birthdate input
 function birthdateValidity() {
@@ -149,10 +141,8 @@ function birthdateValidity() {
 }
   
 // listen quantity input
-quantity.addEventListener("input", quantityValue);
-function quantityValue() {
-  quantityValidity();
-}
+quantity.addEventListener("input", quantityValidity);
+
 // control quantity input
 function quantityValidity() {
   if (quantity.validity.valid) {    
@@ -167,24 +157,27 @@ function quantityValidity() {
   }
   }
 
+// listen location input  
+const townInput = document.querySelectorAll("input[name=location]");
+townInput.forEach((locationInput) => locationInput.addEventListener("input", locationValidity));
+
 // control location input
 function locationValidity() {
   const town = document.querySelector('input[name=location]:checked');    
   if (town !== null) {  
-    removeError(locationDataError);
+    removeError(locationDataError);    
     return true;
   }
   if (town === null) {   
     locationDataError.setAttribute("data-error", "Vous devez choisir une option");
-    locationDataError.setAttribute("data-error-visible", "true");
+    locationDataError.setAttribute("data-error-visible", "true");    
     return false;
-  }
+  }  
 }
 
-checkboxInput.addEventListener("change", checkboxValue);
-function checkboxValue() {
-  checkboxValidity();
-}
+// listen checkbox input
+checkboxInput.addEventListener("change", checkboxValidity);
+
 // control checkbox input
 function checkboxValidity() {  
   if (checkboxInput.validity.valid) {  
