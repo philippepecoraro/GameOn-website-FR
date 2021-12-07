@@ -82,7 +82,7 @@ function firstNameValidity() {
     return true;
   }
   if (!firstname.validity.valid) {       
-    firstnameDataError.setAttribute("data-error", "Veuillez entrer un minimum de 2 caractères pour le champ du prénom");
+    firstnameDataError.setAttribute("data-error", "Veuillez entrer un minimum de 2 caractères dont une majuscule");
     firstnameDataError.setAttribute("data-error-visible", "true");
     firstname.focus();
     return false;
@@ -99,7 +99,7 @@ function lastNameValidity() {
     return true;
   }   
    if (!lastname.validity.valid) {     
-      lastnameDataError.setAttribute("data-error", "Veuillez entrer un minimum de 2 caractères pour le champ du nom");
+      lastnameDataError.setAttribute("data-error", "Veuillez entrer un minimum de 2 caractères dont une majuscule");
       lastnameDataError.setAttribute("data-error-visible", "true");
       lastname.focus();
       return false;
