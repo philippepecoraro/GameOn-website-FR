@@ -75,8 +75,9 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"                  
-                  required                 
+                  minlength="2"                      
+                  pattern="(?=.*[A-Z])(?=.*[a-z])[A-Za-z-éè' ]{2,}"   
+                  required        
                 /><br>                
               </div>
               <div
@@ -88,8 +89,9 @@
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"                  
-                  required                  
+                  minlength="2"                       
+                  pattern="(?=.*[A-Z])(?=.*[a-z])[A-Za-z-éè' ]{2,}" 
+                  required            
                 /><br>                
               </div>
               <div
@@ -101,6 +103,7 @@
                   type="email"
                   id="email"
                   name="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"
                   required
                 /><br>                 
               </div>
