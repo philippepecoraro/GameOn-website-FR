@@ -25,6 +25,8 @@ const birthdateDataError = document.querySelector(".formData[data-error3");
 const quantityDataError = document.querySelector(".formData[data-error4]");
 const locationDataError = document.querySelector(".formData[data-error5]");
 const checkboxDataMissing = document.querySelector(".formData[data-error6]");
+const textLabel = document.querySelector(".text-label");
+const submitButton = document.querySelector(".btn-submit");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -38,7 +40,7 @@ function launchModal() {
 document.querySelector(".close").addEventListener("click", closeModal);
 
 // close modal form
-function closeModal() {
+function closeModal() { 
   modalbg.style.display = "none";
   document.getElementById('reserve').reset();   
   for (const item of formData) {    
@@ -52,23 +54,27 @@ function closeModal() {
 
 // close modal endForm
 function closeEndForm() {
- document.getElementById("reserve").submit();
-  modalEndForm.style.display = "none";
+  document.getElementById("reserve").submit();
 }
 
 // launch modal endForm
-document.querySelector(".btn-submit").addEventListener("click", launchEndForm);
+submitButton.addEventListener("click", launchEndForm);
 
 function launchEndForm(e) {  
   e.preventDefault();  
-  if (validate()) {
-    modalbg.style.display = "none";
-    modalEndForm.style.display = "block";
-    window.scrollTo(0, 0);
-    setTimeout(closeEndForm, 3000);
-    for (const item of modalBtn) {
-      item.disabled = true;
-    }
+  if (validate()) {  
+   for (const item of formData) {    
+     item.style.display = "none";
+  }   
+    submitButton.setAttribute("value", "Fermez");
+    submitButton.setAttribute("type", "button");
+    textLabel.innerHTML = "<p>Merci d'avoir complété votre formulaire d'inscription</p>";
+    textLabel.style.fontSize = "25px";   
+    textLabel.style.padding = "300px 0";
+    textLabel.style.textAlign = "center";     
+    if (submitButton) {      
+      submitButton.addEventListener("click", closeEndForm);
+    } 
   }  
 }          
 
