@@ -187,33 +187,6 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
-.endForm {
-  display: none; 
-  width: 100%; 
-  overflow: auto;
-  background-color: #66BB6A;
-  text-align: center;
-  margin: auto;
-  border-radius: 15px;
-  font-size: 30px;
-  font-weight: bold;
-  border: 2px solid black;
-  padding: 30px;
-}
-.endForm p {
-  padding-top: 10px;
-}
-
-.endFormBtn:hover {
-  background: #3876ac;
-}
-
-@media screen and (max-width: 780px) {
-  .endForm { 
-    margin-top: 100px;   
-  }
-}  
-
 label {
   font-family: var(--font-default);
   font-size: 17px;
